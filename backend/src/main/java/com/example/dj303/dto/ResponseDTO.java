@@ -11,11 +11,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ResponseDTO {
 
+	private String input;
 	private Integer code;
 	private List<String> playList;
 
 	@Builder
-	public ResponseDTO(Integer code, List<String> playList) {
+	public ResponseDTO(String input, Integer code, List<String> playList) {
+		this.input = input;
 		this.code = code;
 		this.playList = playList;
 	}

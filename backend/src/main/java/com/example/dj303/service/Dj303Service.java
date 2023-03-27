@@ -36,6 +36,7 @@ public class Dj303Service {
 
 		return ResponseDTO
 			.builder()
+			.input(requestDTO.getQuestion())
 			.code(HttpStatus.OK.value())
 			.playList(playList)
 			.build();
