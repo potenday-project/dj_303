@@ -16,7 +16,7 @@ DJ 303 서비스를 통해 검색을 해보세요!
 ### **1. 음악 추천 리스트 질의**
 HTTP METHOD|URL|
 |------|---|
-|GET|http://[ip]:[port]/gptAPI/playList|
+|GET|http://{server_ip}/gptAPI/playList|
 
 ### **Request**
 
@@ -34,7 +34,7 @@ HTTP METHOD|URL|
 
 ### **Example**
 - Request :
-`http://[ip]:[port}/gptAPI/playListquestion=윤하 - 사건의지평선 같은 노래 추천좀 해줄수 있나요?`
+`http://{server_ip}/gptAPI/playListquestion=윤하 - 사건의지평선 같은 노래 추천좀 해줄수 있나요?`
 
 - Response 
 ```json
