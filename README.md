@@ -34,7 +34,7 @@ HTTP METHOD|URL|
 
 ### **Example**
 - Request :
-`http://{server_ip}/gptAPI/playListquestion=윤하 - 사건의지평선 같은 노래 추천좀 해줄수 있나요?`
+`http://{server_ip}/gptAPI/playList?question=윤하 - 사건의지평선 같은 노래 추천좀 해줄수 있나요?`
 
 - Response 
 ```json
