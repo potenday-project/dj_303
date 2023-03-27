@@ -11,7 +11,7 @@ DJ 303 서비스를 통해 검색을 해보세요!
 
 ---
 
-## API 정리 📚
+## API Document 📚
 
 ### **1. 음악 추천 리스트 질의**
 HTTP METHOD|URL|
