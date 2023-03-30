@@ -12,7 +12,7 @@ DJ 303 서비스를 통해 검색을 해보세요!
 ---
 
 ## API Document 📚
-API 문서는 [Link](https://github.com/potenday-project/dj_303/wiki/API-Document)에서 확인 가능합니다.
+해당 서비스의 API는 [Doc](https://github.com/potenday-project/dj_303/wiki/API-Document)에서 확인 가능합니다.
 
 
 ## 프로젝트 기술스택 🏰
