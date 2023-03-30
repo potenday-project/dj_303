@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css } from "@emotion/css";
 import { suitBold, suitMedium, suitRegular } from "./font";
 
 export const fontSuitBold = css`
@@ -11,4 +11,14 @@ export const fontSuitMedium = css`
 
 export const fontSuitRegular = css`
   font-family: ${suitRegular.style.fontFamily};
+`;
+
+export const flexCenter = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const marginBottom = (size: number) => css`
+  margin-bottom: ${size}px;
 `;
