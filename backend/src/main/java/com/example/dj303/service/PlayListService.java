@@ -31,8 +31,16 @@ public class PlayListService {
 
     @Transactional(readOnly = true)
     public SliceResponse<PlayListResponseDTO> getPlayLists(final Long lastPlayListId) {
-        Slice<PlayListResponseDTO> playListResponseDto = playListRepository.getPlayListById(lastPlayListId,
-                PageRequest.of(0, 10)).map(PlayListResponseDTO::toDto);
+
+        Slice<PlayListResponseDTO> playListResponseDto;
+
+        if (lastPlayListId == null) {
+            playListResponseDto = playListRepository
+                    .getPlayListById(PageRequest.of(0, 20)).map(PlayListResponseDTO::toDto);
+        } else {
+            playListResponseDto = playListRepository.getPlayListById(lastPlayListId,
+                    PageRequest.of(0, 20)).map(PlayListResponseDTO::toDto);
+        }
 
         return SliceResponse.of(playListResponseDto);
     }
@@ -49,7 +57,6 @@ public class PlayListService {
         return playListRepository.save(entity).getId();
     }
 
-
     /**
      * 플레이 리스트 평점 및 리뷰 업데이트
      */
@@ -57,6 +64,10 @@ public class PlayListService {
     public void updatePlayListReview(final ReviewRequestDTO reviewRequestDTO) {
         PlayList playList = playListRepository.findById(reviewRequestDTO.getId())
                 .orElseThrow(() -> new CustomException("해당 플레이 리스트가 존재 하지 않습니다."));
+
+        if (playList.getIsEvaluated()) {
+            throw new CustomException("플레이리스트 평가는 1회만 할 수 있습니다.");
+        }
 
         playList.updateReview(reviewRequestDTO);
     }
