@@ -7,8 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -31,8 +31,10 @@ public class PlayListDetailsResponseDTO {
     }
 
     public static PlayListDetailsResponseDTO toDTO(final PlayList playList) {
-        List<String> musicList = Arrays
-                .stream(StringUtils.split(playList.getMusicList(), "\n")).toList();
+        String[] musics = StringUtils.split(playList.getMusicList(), "\n.");
+
+        List<String> musicList = IntStream.range(0, musics.length)
+                .filter(i -> i % 2 == 1).mapToObj(i -> StringUtils.trim(musics[i])).toList();
 
         return PlayListDetailsResponseDTO.builder()
                 .id(playList.getId())

@@ -30,7 +30,7 @@ public class ChatGPTService {
                 + " - "
                 + songRequestDTO.getSong()
                 + "와 비슷한 노래들을 추천 해줘."
-                + "해당 질문의 결과를 가수 - 제목 형태의 리스트로 출력 해줘.";
+                + "해당 질문의 결과를 가수 - 제목 형태의 리스트로 4개만 출력 해줘.";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

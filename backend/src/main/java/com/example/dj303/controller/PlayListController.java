@@ -24,7 +24,7 @@ public class PlayListController {
     }
 
     @GetMapping("/feed")
-    public SliceResponse<PlayListResponseDTO> getPlayLists(@RequestParam final Long lastPlayListId) {
+    public SliceResponse<PlayListResponseDTO> getPlayLists(final Long lastPlayListId) {
         return playListService.getPlayLists(lastPlayListId);
     }
 
