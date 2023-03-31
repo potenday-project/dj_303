@@ -31,16 +31,8 @@ public class PlayListService {
 
     @Transactional(readOnly = true)
     public SliceResponse<PlayListResponseDTO> getPlayLists(final Long lastPlayListId) {
-
-        Slice<PlayListResponseDTO> playListResponseDto;
-
-        if (lastPlayListId == null) {
-            playListResponseDto = playListRepository
-                    .getPlayListById(PageRequest.of(0, 20)).map(PlayListResponseDTO::toDto);
-        } else {
-            playListResponseDto = playListRepository.getPlayListById(lastPlayListId,
-                    PageRequest.of(0, 20)).map(PlayListResponseDTO::toDto);
-        }
+        Slice<PlayListResponseDTO> playListResponseDto = playListRepository
+                .getPlayListById(lastPlayListId, PageRequest.of(0, 20)).map(PlayListResponseDTO::toDto);
 
         return SliceResponse.of(playListResponseDto);
     }
