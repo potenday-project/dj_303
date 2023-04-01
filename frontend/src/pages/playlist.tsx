@@ -1,18 +1,26 @@
-import Form from "@/components/Form";
 import PlaylistCard from "@/components/PlayListCard";
-import { flexCenter, fontSuitBold, fontSuitRegular } from "@/styles/mixins";
+import { flexCenter, fontSuitBold, fontSuitRegular, mobileView } from "@/styles/mixins";
 import styled from "@emotion/styled";
 import axios from "axios";
 
 const Container = styled.div`
-  /* ${flexCenter};
-  flex-direction: column; */
+  ${flexCenter};
+  flex-direction: column;
+
+  ${mobileView} {
+    width: 100%;
+  }
 `;
 
 const TitleContainer = styled.div`
-  label: TitleContainer;
+  label: PlayListTitleContainer;
   margin-bottom: 40px;
   text-align: center;
+
+  ${mobileView} {
+    margin-bottom: 48px;
+    text-align: left;
+  }
 `;
 
 const Title = styled.div`
@@ -21,6 +29,11 @@ const Title = styled.div`
   font-weight: 700;
   ${fontSuitBold};
   margin-bottom: 8px;
+
+  ${mobileView} {
+    word-break: keep-all;
+    margin-bottom: 24px;
+  }
 `;
 
 const SubTitle = styled.div`
@@ -32,6 +45,10 @@ const SubTitle = styled.div`
 
 const PlayList = styled.div`
   label: PlayList;
+
+  ${mobileView} {
+    width: 100%;
+  }
 `;
 
 interface Props {

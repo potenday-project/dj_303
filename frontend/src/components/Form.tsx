@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Button from "./Button";
 import Input from "./Input";
-import { absoluteCenter, flexCenter, fontSuitBold, marginBottom } from "../styles/mixins";
+import { flexCenter, fontSuitBold, marginBottom, mobileView } from "../styles/mixins";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -17,19 +17,34 @@ const FormBlock = styled.form`
   flex-direction: column;
   border-radius: 16px;
   position: relative;
-  ${absoluteCenter};
+
+  ${mobileView} {
+    width: auto;
+    height: auto;
+    padding: 48px 24px 24px;
+  }
 `;
 
 const TitleWrapBlock = styled.div`
   ${flexCenter};
   flex-direction: column;
   margin-bottom: 54px;
+
+  ${mobileView} {
+    align-items: baseline;
+    line-height: 30px;
+  }
 `;
 
 const TitleBlock = styled.div`
   ${fontSuitBold}
   font-size: 24px;
   color: #ffffff;
+
+  ${mobileView} {
+    font-size: 20px;
+    word-break: keep-all;
+  }
 `;
 
 const labelCss = css`
@@ -45,6 +60,10 @@ const CharacterImage = styled(Image)`
   position: absolute;
   left: -80px;
   bottom: 2px;
+
+  ${mobileView} {
+    display: none;
+  }
 `;
 
 const Form: React.FC = () => {
@@ -115,6 +134,9 @@ const Form: React.FC = () => {
           container: css`
             ${marginBottom(32)};
             height: 104px;
+            ${mobileView} {
+              ${marginBottom(20)}
+            }
           `,
         }}
         placeholder="가수 이름을 입력해주세요."
@@ -129,6 +151,10 @@ const Form: React.FC = () => {
           container: css`
             ${marginBottom(42)};
             height: 104px;
+
+            ${mobileView} {
+              ${marginBottom(56)}
+            }
           `,
         }}
         placeholder="노래 제목을 입력해주세요."
@@ -136,7 +162,14 @@ const Form: React.FC = () => {
         onChange={handleTitle}
         errorMessage={titleError}
       />
-      <Button text="DJ303에게 보내기" disabled={disabled} onClick={handleSubmit} />
+      <Button
+        css={css`
+          margin-top: auto;
+        `}
+        text="DJ303에게 보내기"
+        disabled={disabled}
+        onClick={handleSubmit}
+      />
       <CharacterImage src="/test-back-img.png" alt="test back img" width="300" height="200" />
     </FormBlock>
   );

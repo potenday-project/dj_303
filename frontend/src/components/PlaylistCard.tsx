@@ -2,8 +2,10 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import Link from "next/link";
+import { fontSuitRegular, mobileView } from "@/styles/mixins";
 
 const Container = styled.div`
+  label: PlayListCard;
   background: #242424;
   width: 744px;
   border-radius: 8px;
@@ -11,6 +13,14 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   padding: 24px;
+
+  ${mobileView} {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 12px;
+    padding: 16px;
+    width: auto;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -18,6 +28,8 @@ const TitleContainer = styled.div`
   flex: 1;
   flex-direction: column;
   color: #ffffff;
+  font-size: 12px;
+  ${fontSuitRegular};
 `;
 
 const Singer = styled.div`

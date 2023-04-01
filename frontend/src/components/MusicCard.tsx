@@ -1,3 +1,4 @@
+import { fontSuitRegular, mobileView } from "@/styles/mixins";
 import styled from "@emotion/styled";
 import * as React from "react";
 
@@ -10,12 +11,17 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 16px;
+
+  ${mobileView} {
+    width: auto;
+  }
 `;
 
 const Text = styled.div`
   height: 24px;
   color: #ffffff;
   font-size: 16px;
+  ${fontSuitRegular};
 `;
 
 interface Props {

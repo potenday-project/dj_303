@@ -1,27 +1,31 @@
 import Button from "@/components/Button";
 import Chip from "@/components/Chip";
 import MusicCard from "@/components/MusicCard";
+import SurveyModal from "@/components/SurveyModal";
 import Tooltip from "@/components/Tooltip";
 import {
-  absoluteCenter,
   flexCenter,
+  flexColumnCenter,
   fontSuitBold,
   fontSuitRegular,
   marginBottom,
   marginTop,
+  mobileView,
 } from "@/styles/mixins";
-import { cx } from "@emotion/css";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import axios from "axios";
 import { GetStaticProps } from "next";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
-  ${flexCenter};
-  ${absoluteCenter};
+  ${flexColumnCenter};
   flex-direction: column;
+
+  ${mobileView} {
+    width: 100%;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -35,13 +39,21 @@ const Title = styled.div`
   font-size: 28px;
   margin-bottom: 8px;
   color: #ffffff;
-  height: 40px;
+
+  ${mobileView} {
+    word-break: keep-all;
+    margin-bottom: 24px;
+  }
 `;
 
 const SubTitleBlock = styled.div`
   display: flex;
   color: #ffffff;
   align-items: center;
+
+  ${mobileView} {
+    flex-wrap: wrap;
+  }
 `;
 
 const Word = styled.span`
@@ -50,10 +62,21 @@ const Word = styled.span`
 
 const Paragraph = styled.span`
   margin-left: 8px;
+
+  ${mobileView} {
+    &:last-child {
+      margin-left: 0;
+      margin-top: 12px;
+    }
+  }
 `;
 
 const CardList = styled.div`
   position: relative;
+
+  ${mobileView} {
+    width: 100%;
+  }
 `;
 
 const buttonCss = css`
@@ -91,22 +114,34 @@ const tooltipCss = css`
 `;
 
 export default function ResultPage(props: Props) {
-  const [visible, setVisible] = useState(false);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(true);
 
   const onCopyClick = async () => {
     const currentUrl = window.location.href;
 
     try {
       await navigator.clipboard.writeText(currentUrl);
-      setVisible(true);
+      setTooltipVisible(true);
     } catch (err) {
       console.error("URL을 복사하는데 실패했습니다.", err);
     }
 
     setTimeout(() => {
-      setVisible(false);
+      setTooltipVisible(false);
+      setModalOpen(true);
     }, 3000);
   };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      setModalOpen(false);
+    }
+  });
 
   return (
     <Container>
@@ -116,17 +151,19 @@ export default function ResultPage(props: Props) {
           <Chip text={props.data.singer} />
           <Word>의</Word>
           <Chip text={props.data.song} />
-          <Paragraph>를 기반으로 추천된 플레이리스트에요.</Paragraph>
+          <Paragraph>를</Paragraph>
+          <Paragraph>기반으로 추천된 플레이리스트에요.</Paragraph>
         </SubTitleBlock>
       </TitleContainer>
       <CardList>
         {props.data.musicList.map((music, index) => (
           <MusicCard key={music + index} title={music} />
         ))}
-        {visible && <Tooltip css={tooltipCss} text="플레이리스트 링크가 복사되었어요!" />}
+        {tooltipVisible && <Tooltip css={tooltipCss} text="플레이리스트 링크가 복사되었어요!" />}
       </CardList>
       <Button css={buttonCss} text="공유하기" onClick={onCopyClick} />
       <LinkTextButton href="/playlist">DJ303이 추천한 다른 플레이리스트 보러가기</LinkTextButton>
+      <SurveyModal open={isModalOpen} handleModalClose={handleModalClose} />
     </Container>
   );
 }
