@@ -1,5 +1,5 @@
 import Button from "@/components/Button";
-import { flexCenter, fontSuitBold } from "@/styles/mixins";
+import { absoluteCenter, flexCenter, fontSuitBold } from "@/styles/mixins";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 const Container = styled.div`
   ${flexCenter};
   flex-direction: column;
+  ${absoluteCenter};
 `;
 
 const Text = styled.div`

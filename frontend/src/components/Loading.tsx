@@ -1,9 +1,10 @@
-import { flexCenter } from "@/styles/mixins";
+import { absoluteCenter, flexCenter } from "@/styles/mixins";
 import styled from "@emotion/styled";
 import React from "react";
 
 const Container = styled.div`
   ${flexCenter};
+  ${absoluteCenter};
   flex-direction: column;
 `;
 

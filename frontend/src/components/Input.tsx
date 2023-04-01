@@ -21,7 +21,6 @@ interface DefaultInput {
 }
 
 const DefaultInput = styled.input<DefaultInput>`
-  ${(props) => props.css};
   border-radius: 8px;
   background: #333333;
   color: #ffffff;
@@ -40,6 +39,8 @@ const DefaultInput = styled.input<DefaultInput>`
   &:focus {
     border: ${(props) => (props.error ? "1px solid #EB4853" : "1px solid #ffffff")};
   }
+
+  ${(props) => props.css};
 `;
 
 const ErrorMessage = styled.span`
@@ -65,7 +66,7 @@ interface Props {
   label?: string;
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-  errorMessage: string | null;
+  errorMessage?: string | null;
 }
 
 const Input: React.FC<Props> = ({

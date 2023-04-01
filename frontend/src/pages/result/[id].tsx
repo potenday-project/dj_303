@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import Chip from "@/components/Chip";
 import MusicCard from "@/components/MusicCard";
+import SurveyModal from "@/components/SurveyModal";
 import Tooltip from "@/components/Tooltip";
 import {
   absoluteCenter,
@@ -91,20 +92,22 @@ const tooltipCss = css`
 `;
 
 export default function ResultPage(props: Props) {
-  const [visible, setVisible] = useState(false);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const onCopyClick = async () => {
     const currentUrl = window.location.href;
 
     try {
       await navigator.clipboard.writeText(currentUrl);
-      setVisible(true);
+      setTooltipVisible(true);
     } catch (err) {
       console.error("URL을 복사하는데 실패했습니다.", err);
     }
 
     setTimeout(() => {
-      setVisible(false);
+      setTooltipVisible(false);
+      setModalOpen(true);
     }, 3000);
   };
 
@@ -123,10 +126,11 @@ export default function ResultPage(props: Props) {
         {props.data.musicList.map((music, index) => (
           <MusicCard key={music + index} title={music} />
         ))}
-        {visible && <Tooltip css={tooltipCss} text="플레이리스트 링크가 복사되었어요!" />}
+        {tooltipVisible && <Tooltip css={tooltipCss} text="플레이리스트 링크가 복사되었어요!" />}
       </CardList>
       <Button css={buttonCss} text="공유하기" onClick={onCopyClick} />
       <LinkTextButton href="/playlist">DJ303이 추천한 다른 플레이리스트 보러가기</LinkTextButton>
+      <SurveyModal open={isModalOpen} />
     </Container>
   );
 }
