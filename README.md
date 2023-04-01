@@ -19,6 +19,7 @@ DJ 303 서비스를 통해 검색을 해보세요!
 ## 프로젝트 기술스택 🏰
 
 ### Back-End 🏫
+![BackEnd](https://user-images.githubusercontent.com/35368554/229292541-63fde392-5cec-4494-af35-b153043b2cd8.jpg)
 
 ### Front-End 🏡
 
