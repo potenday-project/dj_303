@@ -1,6 +1,17 @@
 import { css } from "@emotion/react";
 import { suitBold, suitMedium, suitRegular } from "./font";
 
+export const wideWidth = 1920;
+export const desktopWidth = 992;
+export const tabletWidth = 768;
+export const smallWidth = 340;
+
+export const mobileView = `@media (max-width: ${desktopWidth - 1}px)`;
+export const tabletView = `@media (min-width: ${tabletWidth}px)`;
+export const smallMobileView = `@media (max-width: ${smallWidth}px)`;
+export const desktopView = `@media (min-width: ${desktopWidth}px)`;
+export const wideView = `@media (min-width: ${wideWidth}px)`;
+
 export const fontSuitBold = css`
   font-family: ${suitBold.style.fontFamily};
 `;

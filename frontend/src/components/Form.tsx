@@ -3,7 +3,13 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Button from "./Button";
 import Input from "./Input";
-import { absoluteCenter, flexCenter, fontSuitBold, marginBottom } from "../styles/mixins";
+import {
+  absoluteCenter,
+  flexCenter,
+  fontSuitBold,
+  marginBottom,
+  mobileView,
+} from "../styles/mixins";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -18,6 +24,10 @@ const FormBlock = styled.form`
   border-radius: 16px;
   position: relative;
   ${absoluteCenter};
+
+  ${mobileView} {
+    width: 100%;
+  }
 `;
 
 const TitleWrapBlock = styled.div`
