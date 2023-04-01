@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { flexCenter, fontSuitRegular } from "@/styles/mixins";
+import { flexCenter, fontSuitRegular, mobileView } from "@/styles/mixins";
 import { ColorStyle, palette } from "@/styles/palette";
 import { SerializedStyles } from "@emotion/react";
 
@@ -32,6 +32,10 @@ const DefaultButton = styled.button<DefaultButton>`
     background: ${(props) => palette.button.disabled[props.color]};
     color: #8b8b8b;
     cursor: not-allowed;
+  }
+
+  ${mobileView} {
+    width: 100%;
   }
 `;
 

@@ -2,11 +2,12 @@ import styled from "@emotion/styled";
 import Head from "next/head";
 import Link from "next/link";
 import Button from "@/components/Button";
-import { absoluteCenter, fontSuitBold, fontSuitRegular, marginBottom } from "@/styles/mixins";
+import { flexCenter, fontSuitBold, marginBottom } from "@/styles/mixins";
 
 const MainContainer = styled.main`
-  ${absoluteCenter};
-  text-align: center;
+  label: MainContainer;
+  ${flexCenter};
+  flex-direction: column;
 `;
 
 const Title = styled.h1`

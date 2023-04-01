@@ -30,6 +30,13 @@ export const flexCenter = css`
   justify-content: center;
 `;
 
+export const flexColumnCenter = css`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`;
+
 export const marginBottom = (size: number) => css`
   margin-bottom: ${size}px;
 `;

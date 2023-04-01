@@ -4,14 +4,13 @@ import MusicCard from "@/components/MusicCard";
 import SurveyModal from "@/components/SurveyModal";
 import Tooltip from "@/components/Tooltip";
 import {
-  absoluteCenter,
   flexCenter,
+  flexColumnCenter,
   fontSuitBold,
   fontSuitRegular,
   marginBottom,
   marginTop,
 } from "@/styles/mixins";
-import { cx } from "@emotion/css";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import axios from "axios";
@@ -20,8 +19,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 const Container = styled.div`
-  ${flexCenter};
-  ${absoluteCenter};
+  ${flexColumnCenter};
   flex-direction: column;
 `;
 

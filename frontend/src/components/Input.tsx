@@ -2,6 +2,7 @@ import * as React from "react";
 import { SerializedStyles } from "@emotion/react";
 import styled from "@emotion/styled";
 import Image from "next/image";
+import { mobileView } from "@/styles/mixins";
 
 const Container = styled.div<{ css: SerializedStyles | undefined }>`
   label: InputContainer;
@@ -9,6 +10,10 @@ const Container = styled.div<{ css: SerializedStyles | undefined }>`
   display: flex;
   flex-direction: column;
   position: relative;
+
+  ${mobileView} {
+    width: 100%;
+  }
 `;
 
 const Label = styled.span<{ css: SerializedStyles | undefined }>`
@@ -41,6 +46,10 @@ const DefaultInput = styled.input<DefaultInput>`
   }
 
   ${(props) => props.css};
+
+  ${mobileView} {
+    width: auto;
+  }
 `;
 
 const ErrorMessage = styled.span`
