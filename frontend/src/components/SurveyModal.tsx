@@ -1,4 +1,10 @@
-import { flexCenter, fontSuitBold, fontSuitMedium, fontSuitRegular } from "@/styles/mixins";
+import {
+  flexCenter,
+  fontSuitBold,
+  fontSuitMedium,
+  fontSuitRegular,
+  mobileView,
+} from "@/styles/mixins";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import axios from "axios";
@@ -7,6 +13,8 @@ import React, { ChangeEvent, useState } from "react";
 import Modal from "react-modal";
 import Button from "./Button";
 import Input from "./Input";
+import { isMobile } from "react-device-detect";
+import Image from "next/image";
 
 const Text = styled.div`
   font-size: 16px;
@@ -18,6 +26,10 @@ const Text = styled.div`
 const ScoreList = styled.div<{ isExtend: boolean }>`
   display: flex;
   margin-bottom: ${(props) => (props.isExtend ? "36px" : 0)};
+
+  ${mobileView} {
+    width: 100%;
+  }
 `;
 
 const ScoreButton = styled.button<{ isSelected: boolean }>`
@@ -27,11 +39,10 @@ const ScoreButton = styled.button<{ isSelected: boolean }>`
   ${flexCenter};
   margin-right: 24px;
   border-radius: 24px;
-  width: 48px;
-  height: 48px;
+  padding: 12.5px 20.5px;
   background: #333333;
   outline: none;
-  border: none;
+  border: 1px solid #333333;
   border: ${(props) => (props.isSelected ? "1px solid #eb4853" : "transparent")};
 
   &:hover {
@@ -41,6 +52,11 @@ const ScoreButton = styled.button<{ isSelected: boolean }>`
 
   &:last-child {
     margin-right: 0;
+  }
+
+  ${mobileView} {
+    padding: 10.5px 18.5px;
+    margin-right: 11px;
   }
 `;
 
@@ -60,13 +76,13 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     background: "#242424",
-    padding: "24px",
+    padding: "24px 24px 36px",
     width: "528px",
     height: "auto",
     borderRadius: "16px",
-    flexDirection: "column",
     border: "none",
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -77,6 +93,16 @@ const customStyles = {
     right: 0,
     bottom: 0,
     backgroundColor: "rgb(0, 0, 0, 0.7)",
+  },
+};
+
+const mobileStyles = {
+  content: {
+    ...customStyles.content,
+    width: "74%",
+  },
+  overlay: {
+    ...customStyles.overlay,
   },
 };
 
@@ -101,8 +127,24 @@ const Score = ({
   );
 };
 
+const IconWrap = styled.div`
+  margin-bottom: 12px;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+`;
+
+const CloseIcon = styled(Image)``;
+
+const CloseIconButton = styled.button`
+  background: transparent;
+  outline: none;
+  border: none;
+`;
+
 interface Props {
   open: boolean;
+  handleModalClose: () => void;
 }
 
 const SurveyModal: React.FC<Props> = (props: Props) => {
@@ -133,7 +175,12 @@ const SurveyModal: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <Modal style={customStyles} isOpen={props.open}>
+    <Modal style={isMobile ? mobileStyles : customStyles} isOpen={props.open}>
+      <IconWrap>
+        <CloseIconButton onClick={props.handleModalClose}>
+          <CloseIcon src="/close.svg" alt="close icon" width="16" height="16" />
+        </CloseIconButton>
+      </IconWrap>
       <Text>추천 플레이리스트가 얼마나 마음에 드시나요?</Text>
       <ScoreList isExtend={star !== null}>
         {[1, 2, 3, 4, 5].map((score, index) => (

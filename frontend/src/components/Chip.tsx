@@ -3,12 +3,11 @@ import styled from "@emotion/styled";
 import * as React from "react";
 
 const Container = styled.div`
-  width: 69px;
-  height: 39px;
   background: #333333;
   border-radius: 4px;
   color: #ffffff;
   ${flexCenter};
+  padding: 8px;
 `;
 
 const Text = styled.span`

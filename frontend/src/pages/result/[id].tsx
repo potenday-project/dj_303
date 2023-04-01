@@ -10,17 +10,22 @@ import {
   fontSuitRegular,
   marginBottom,
   marginTop,
+  mobileView,
 } from "@/styles/mixins";
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import axios from "axios";
 import { GetStaticProps } from "next";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
   ${flexColumnCenter};
   flex-direction: column;
+
+  ${mobileView} {
+    width: 100%;
+  }
 `;
 
 const TitleContainer = styled.div`
@@ -34,13 +39,21 @@ const Title = styled.div`
   font-size: 28px;
   margin-bottom: 8px;
   color: #ffffff;
-  height: 40px;
+
+  ${mobileView} {
+    word-break: keep-all;
+    margin-bottom: 24px;
+  }
 `;
 
 const SubTitleBlock = styled.div`
   display: flex;
   color: #ffffff;
   align-items: center;
+
+  ${mobileView} {
+    flex-wrap: wrap;
+  }
 `;
 
 const Word = styled.span`
@@ -49,10 +62,21 @@ const Word = styled.span`
 
 const Paragraph = styled.span`
   margin-left: 8px;
+
+  ${mobileView} {
+    &:last-child {
+      margin-left: 0;
+      margin-top: 12px;
+    }
+  }
 `;
 
 const CardList = styled.div`
   position: relative;
+
+  ${mobileView} {
+    width: 100%;
+  }
 `;
 
 const buttonCss = css`
@@ -91,7 +115,7 @@ const tooltipCss = css`
 
 export default function ResultPage(props: Props) {
   const [tooltipVisible, setTooltipVisible] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(true);
 
   const onCopyClick = async () => {
     const currentUrl = window.location.href;
@@ -109,6 +133,16 @@ export default function ResultPage(props: Props) {
     }, 3000);
   };
 
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      setModalOpen(false);
+    }
+  });
+
   return (
     <Container>
       <TitleContainer>
@@ -117,7 +151,8 @@ export default function ResultPage(props: Props) {
           <Chip text={props.data.singer} />
           <Word>의</Word>
           <Chip text={props.data.song} />
-          <Paragraph>를 기반으로 추천된 플레이리스트에요.</Paragraph>
+          <Paragraph>를</Paragraph>
+          <Paragraph>기반으로 추천된 플레이리스트에요.</Paragraph>
         </SubTitleBlock>
       </TitleContainer>
       <CardList>
@@ -128,7 +163,7 @@ export default function ResultPage(props: Props) {
       </CardList>
       <Button css={buttonCss} text="공유하기" onClick={onCopyClick} />
       <LinkTextButton href="/playlist">DJ303이 추천한 다른 플레이리스트 보러가기</LinkTextButton>
-      <SurveyModal open={isModalOpen} />
+      <SurveyModal open={isModalOpen} handleModalClose={handleModalClose} />
     </Container>
   );
 }
