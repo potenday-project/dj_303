@@ -10,3 +10,5 @@ create table if not exists play_list
     created_at   timestamp default CURRENT_TIMESTAMP,
     updated_at   timestamp default CURRENT_TIMESTAMP
 );
+
+ALTER TABLE play_list convert to charset utf8
