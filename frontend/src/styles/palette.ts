@@ -8,6 +8,7 @@ type Palette = {
   button: {
     background: Color;
     hover: Color;
+    disabled: Color;
   };
 };
 
@@ -19,6 +20,10 @@ export const palette: Palette = {
     },
     hover: {
       primary: "#a5323a",
+      secondary: "#242424",
+    },
+    disabled: {
+      primary: "#742329",
       secondary: "#242424",
     },
   },
