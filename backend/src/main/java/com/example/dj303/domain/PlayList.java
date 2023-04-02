@@ -64,6 +64,7 @@ public class PlayList {
         this.star = reviewRequestDTO.getStar();
         this.review = reviewRequestDTO.getReview();
         this.isEvaluated = true;
+        this.updatedAt = LocalDateTime.now();
     }
 
     public static PlayList toEntity(SongRequestDTO songRequestDTO, String musicList) {

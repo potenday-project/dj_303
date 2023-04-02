@@ -29,29 +29,24 @@ public class PlayListService {
         return PlayListDetailsResponseDTO.toDTO(playList);
     }
 
+    /**
+     * 전체 플레이 리스트 목록 출력
+     */
     @Transactional(readOnly = true)
     public SliceResponse<PlayListResponseDTO> getPlayLists(final Long lastPlayListId) {
-
-        Slice<PlayListResponseDTO> playListResponseDto;
-
-        if (lastPlayListId == null) {
-            playListResponseDto = playListRepository
-                    .getPlayListById(PageRequest.of(0, 20)).map(PlayListResponseDTO::toDto);
-        } else {
-            playListResponseDto = playListRepository.getPlayListById(lastPlayListId,
-                    PageRequest.of(0, 20)).map(PlayListResponseDTO::toDto);
-        }
+        Slice<PlayListResponseDTO> playListResponseDto = playListRepository
+                .getPlayListById(lastPlayListId, PageRequest.of(0, 20))
+                .map(PlayListResponseDTO::toDto);
 
         return SliceResponse.of(playListResponseDto);
     }
 
     /**
-     * Chat GPT API를 통해 음악리스트 질의 후 테이블에 저장
+     * Chat GPT API 질의 후 플레이리스트 테이블에 저장
      */
     @Transactional
     public Long createPlayList(final SongRequestDTO songRequestDTO) {
         String gptResult = chatGPTService.generatePlayList(songRequestDTO);
-
         PlayList entity = PlayList.toEntity(songRequestDTO, gptResult);
 
         return playListRepository.save(entity).getId();

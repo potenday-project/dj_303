@@ -10,9 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PlayListRepository extends JpaRepository<PlayList, Long> {
 
-    @Query(value = "select p from PlayList p where p.id < :lastPlayListId order by p.id desc")
+    @Query(value = "select p from PlayList p where :lastPlayListId is null or p.id < :lastPlayListId order by p.id desc")
     Slice<PlayList> getPlayListById(final Long lastPlayListId, final Pageable pageable);
-
-    @Query(value = "select p from PlayList p order by p.id desc")
-    Slice<PlayList> getPlayListById(final Pageable pageable);
 }
