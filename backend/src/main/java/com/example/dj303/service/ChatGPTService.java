@@ -26,10 +26,10 @@ public class ChatGPTService {
      */
     public String generatePlayList(final SongRequestDTO songRequestDTO) {
 
-        String prompt = songRequestDTO.getSinger()
-                + " - "
+        String prompt = "가수 ('" + songRequestDTO.getSinger()
+                + "')의 노래 '("
                 + songRequestDTO.getSong()
-                + "와 비슷한 노래들을 추천 해줘."
+                + ")'와 비슷한 노래를 추천 해줘."
                 + "해당 질문의 결과를 가수 - 제목 형태의 리스트로 4개만 출력 해줘.";
 
         HttpHeaders headers = new HttpHeaders();
