@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class SongRequestDTO {
 
     @NotNull
-    @Size(min = 1, max = 30, message = "1~30정자 이내로 입력해야 합니다.")
+    @Size(min = 1, max = 30, message = "1~30자 이내로 입력해야 합니다.")
     private String singer;
 
     @NotNull
