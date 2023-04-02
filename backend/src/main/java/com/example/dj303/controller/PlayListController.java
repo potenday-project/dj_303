@@ -24,8 +24,8 @@ public class PlayListController {
     }
 
     @GetMapping("/feed")
-    public SliceResponse<PlayListResponseDTO> getPlayLists(final Long lastPlayListId) {
-        return playListService.getPlayLists(lastPlayListId);
+    public ResponseEntity<SliceResponse<PlayListResponseDTO>> getPlayLists(final Long lastPlayListId) {
+        return ResponseEntity.ok(playListService.getPlayLists(lastPlayListId));
     }
 
     @PostMapping("/ask")
